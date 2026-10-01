@@ -35,9 +35,10 @@ enum SYNTAX_HIGHLIGHT_MODE {
 struct editor_syntax {
     char **file_match;
     char **keywords;
-    char single_line_comment_start[2];
-    char multi_line_comment_start[3];
-    char multi_line_comment_end[3];
+    // unterminated-string-initialization warning is a false positive here:
+    char __attribute__((__nonstring__)) single_line_comment_start[2];
+    char __attribute__((__nonstring__)) multi_line_comment_start[3];
+    char __attribute__((__nonstring__)) multi_line_comment_end[3];
 };
 
 // A single line of the file we are editing.
